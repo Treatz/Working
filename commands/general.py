@@ -429,11 +429,11 @@ class CmdSay(COMMAND_DEFAULT_CLASS):
 
         # Feedback for the object doing the talking.
         if(caller.db.present):
-            caller.msg('You say, "%s|n"' % speech)
+            caller.msg('You say, "%s|n"' % self.args)
             # Build the string to emit to neighbors.
-            emit_string = '%s says, "%s"' % (caller.name, speech)
+            emit_string = '%s says, "%s"' % (caller.name, self.args)
             caller.location.log_action(emit_string)
-            emit_string = '%s says, "%s"|n' % (caller.name, speech)
+            emit_string = '%s says, "%s"|n' % (caller.name, self.args)
             for item in self.caller.location.contents:
                  if (item is not self.caller):
                      item.msg(emit_string)
