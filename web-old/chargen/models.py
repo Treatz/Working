@@ -7,5 +7,5 @@ class CharApp(models.Model):
     char_name = models.CharField(max_length=80, verbose_name='Character Name')
     date_applied = models.DateTimeField(verbose_name='Date Applied')
     background = models.TextField(verbose_name='Background')
-    player_id = models.IntegerField(default=1, verbose_name='Player ID')
+    account_id = models.IntegerField(default=1, verbose_name='Account ID')
     submitted = models.BooleanField(default=False)

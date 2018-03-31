@@ -3,7 +3,7 @@ from evennia.commands.default.muxcommand import MuxCommand
 
 class CmdReach(MuxCommand):
     """
-       +reach - Allow players/ghosts to interact with the other's world.
+       +reach - Allow accounts/ghosts to interact with the other's world.
 
        Usage:
          +reach

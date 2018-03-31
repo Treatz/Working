@@ -42,17 +42,17 @@ def detail(request):
 
 def creating(request):
     user = request.user
-    #foobar = create.create_player("TestPlayer42", email="test@test.com", password="testpassword", typeclass=settings.BASE_PLAYER_TYPECLASS)
+    #foobar = create.create_account("TestAccount42", email="test@test.com", password="testpassword", typeclass=settings.BASE_ACCOUNT_TYPECLASS)
     #foobar.db.FIRST_LOGIN = True
-    #unloggedin._create_character(self, foobar, settings.BASE_CHARACTER_TYPECLASS, settings.DEFAULT_HOME, settings.PERMISSION_PLAYER_DEFAULT)
+    #unloggedin._create_character(self, foobar, settings.BASE_CHARACTER_TYPECLASS, settings.DEFAULT_HOME, settings.PERMISSION_ACCOUNT_DEFAULT)
     if request.method == 'POST':
         myform = request.POST
         print(request.POST)
         print(myform)
         fields = myform['name']
         pwd = myform['password']
-        circuit = create.create_player(fields, email="test@test.com", password=pwd, typeclass=settings.BASE_PLAYER_TYPECLASS)
-        unloggedin._create_character(user, circuit, settings.BASE_CHARACTER_TYPECLASS, settings.DEFAULT_HOME, settings.PERMISSION_PLAYER_DEFAULT)
+        circuit = create.create_account(fields, email="test@test.com", password=pwd, typeclass=settings.BASE_ACCOUNT_TYPECLASS)
+        unloggedin._create_character(user, circuit, settings.BASE_CHARACTER_TYPECLASS, settings.DEFAULT_HOME, settings.PERMISSION_ACCOUNT_DEFAULT)
         newchar = circuit.db._last_puppet
         newchar.db.tradition = myform['tradition']
         newchar.db.desc =  myform['description']

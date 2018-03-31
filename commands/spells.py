@@ -11,7 +11,7 @@ class CmdSpell(MuxCommand):
                +Portal - Creates a portal that anyone can pass through.
                +Scry - Remote view other locations.
                +Source - locks a source location in place.
-               +Take - Teleports an object from another player.
+               +Take - Teleports an object from another account.
                +Teleport -Teleport through a list of directions
                +Where - Provides directions to a room.
            Entropy

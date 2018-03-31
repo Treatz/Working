@@ -7,7 +7,7 @@ class CmdTake(MuxCommand):
     
        Usage: 
          +take <characte>,<object>    
-       Takes an object from another player.
+       Takes an object from another account.
     
     """   
     key = "+take"

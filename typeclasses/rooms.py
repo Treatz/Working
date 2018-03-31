@@ -31,15 +31,15 @@ class Room(DefaultRoom):
             key = con.get_display_name(looker)
             if con.destination:
                 exits.append("|c|lc%s|lt%s|le" % (con, key))
-            elif con.has_player:
+            elif con.has_account:
                 if(con.db.alive == 0):
-                    users.append("{c|lclook %s|lt%s|le{n" % (con, key))
+                    users.append("|c|lclook %s|lt%s|le|n" % (con, key))
                 if(con.db.alive == 1):
-                    users.append("{c|lclook %s|lt%s|le{n" % (con, key))
+                    users.append("|c|lclook %s|lt%s|le|n" % (con, key))
             else:
-                things.append("{c|lclook %s|lt%s|le" % (con, key))
+                things.append("|c|lclook %s|lt%s|le" % (con, key))
         # get description, build string
-        string = "{c%s{n\n" % self.get_display_name(looker)
+        string = "|c%s|n\n" % self.get_display_name(looker)
         if(looker.db.alive == 1):
             desc = self.db.desc
         if(looker.db.alive == 0):
@@ -47,7 +47,7 @@ class Room(DefaultRoom):
         if desc:
             string += "%s" % desc
         if exits:
-            string += "\n{wExits:{n " + ", ".join(exits)
+            string += "\n|wExits:|n " + ", ".join(exits)
         if users or things:
-            string += "\n{wYou see:{n " + ", ".join(users + things)
+            string += "\n|wYou see:|n " + ", ".join(users + things)
         return string

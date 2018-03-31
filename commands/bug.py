@@ -8,7 +8,7 @@ class CmdBug(default_cmds.MuxCommand):
        Usage:
         +bug <character>
 
-       Listen to another player without their knowledge.
+       Listen to another account without their knowledge.
 
     """
     key = "+bug"

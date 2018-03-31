@@ -10,7 +10,7 @@ class CmdDone(MuxCommand):
        Usage:
          +done <entry>
 
-       cast the players spell.
+       cast the accounts spell.
 
     """
     key = "+done"

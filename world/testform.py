@@ -4,7 +4,7 @@ TABLECHAR = "c"
 FORM = '''
 .------------------------------------------------.
 |                                                |
-|  Name: xxxxx1xxxxx    Player: xxxxxxx2xxxxxxx  |
+|  Name: xxxxx1xxxxx    Account: xxxxxxx2xxxxxxx  |
 |        xxxxxxxxxxx                             |
 |                                                |
  >----------------------------------------------<

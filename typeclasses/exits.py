@@ -38,7 +38,7 @@ class Exit(mySlowExit):
         Helper function for creating an exit command set + command.
 
         The command of this cmdset has the same name as the Exit object
-        and allows the exit to react when the player enter the exit's name,
+        and allows the exit to react when the account enter the exit's name,
         triggering the movement between rooms.
 
         Note that exitdbobj is an ObjectDB instance. This is necessary

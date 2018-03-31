@@ -66,11 +66,11 @@ class CmdSummon(MuxCommand):
         if wins < 4:
             self.caller.msg("Your spell fizzles out and fails.")
             return
-        players = [con for con in self.caller.location.contents if con.has_player]
-        for player in players:
-            if(player.db.alive == 1):
-                player.msg("The spirit world is drawing closer.")
-            if(player.db.alive == 0):
-                player.msg("The physical plane is drawing closer.")
-            player.db.sight = 1
-            player.db.touch = 1
+        accounts = [con for con in self.caller.location.contents if con.has_account]
+        for account in accounts:
+            if(account.db.alive == 1):
+                account.msg("The spirit world is drawing closer.")
+            if(account.db.alive == 0):
+                account.msg("The physical plane is drawing closer.")
+            account.db.sight = 1
+            account.db.touch = 1

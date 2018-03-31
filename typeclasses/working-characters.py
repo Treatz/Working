@@ -2,7 +2,7 @@
 GO!
 Characters
 
-Characters are (by default) Objects setup to be puppeted by Players.
+Characters are (by default) Objects setup to be puppeted by Accounts.
 They are what you "see" in game. The Character class in this module
 is setup to be the "default" character type created by the default
 creation commands.
@@ -359,13 +359,13 @@ class Character(DefaultCharacter):
     def return_appearance(self, looker):
         looker.msg(image=[self.db.image, self.db.desc])
 
-        def at_post_unpuppet(self, player, session=None):
+        def at_post_unpuppet(self, account, session=None):
             """
-            We stove away the character when the player goes ooc/logs off,
+            We stove away the character when the account goes ooc/logs off,
             otherwise the character object will remain in the room also
-            after the player logged off ("headless", so to say).
+            after the account logged off ("headless", so to say).
             Args:
-            player (Player): The player object that just disconnected
+            account (Account): The account object that just disconnected
                 from this object.
             session (Session): Session controlling the connection that
                 just disconnected.
@@ -475,8 +475,8 @@ class Character(DefaultCharacter):
             destination: the location of the object after moving.
         """
 
-        if not source_location and self.location.has_player:
-            # This was created from nowhere and added to a player's
+        if not source_location and self.location.has_account:
+            # This was created from nowhere and added to an account's
             # inventory; it's probably the result of a create command.
             string = "You now have %s in your possession." % self.get_display_name(self.location)
             self.location.msg(string)

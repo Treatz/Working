@@ -31,11 +31,11 @@ class CmdCharisma(MuxCommand):
             return
         hit =  self.caller.search(self.lhs)
 
-        player = self.caller.db.manipulation + self.caller.db.charisma + self.caller.db.appearance
+        account = self.caller.db.manipulation + self.caller.db.charisma + self.caller.db.appearance
         target = hit.db.manipulation + hit.db.charisma + hit.db.appearance
         wins = 0
         wins2 = 0
-        for x in range(0, player):
+        for x in range(0, account):
             roll = roll_dice(1,10)
             if(roll > 5):
                 wins += 1

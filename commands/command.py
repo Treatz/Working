@@ -1,7 +1,7 @@
 """
 Commands
 
-Commands describe the input the player can do to the game.
+Commands describe the input the account can do to the game.
 
 """
 from evennia.commands.default.muxcommand import MuxCommand
@@ -179,17 +179,17 @@ class Command(BaseCommand):
 #        self.rhs = rhs
 #        self.rhslist = rhslist
 #
-#        # if the class has the player_caller property set on itself, we make
-#        # sure that self.caller is always the player if possible. We also create
+#        # if the class has the account_caller property set on itself, we make
+#        # sure that self.caller is always the account if possible. We also create
 #        # a special property "character" for the puppeted object, if any. This
-#        # is convenient for commands defined on the Player only.
-#        if hasattr(self, "player_caller") and self.player_caller:
+#        # is convenient for commands defined on the Account only.
+#        if hasattr(self, "account_caller") and self.account_caller:
 #            if utils.inherits_from(self.caller, "evennia.objects.objects.DefaultObject"):
 #                # caller is an Object/Character
 #                self.character = self.caller
-#                self.caller = self.caller.player
-#            elif utils.inherits_from(self.caller, "evennia.players.players.DefaultPlayer"):
-#                # caller was already a Player
+#                self.caller = self.caller.account
+#            elif utils.inherits_from(self.caller, "evennia.accounts.accounts.DefaultAccount"):
+#                # caller was already an Account
 #                self.character = self.caller.get_puppet(self.session)
 #            else:
 #                self.character = None
@@ -200,12 +200,12 @@ class FooBar(Command):
     key = "foobar"
 
     def func(self):
-        foobar = create.create_player("TestPlayer4", email="test@test.com", password="testpassword",
-                                      typeclass=settings.BASE_PLAYER_TYPECLASS)
+        foobar = create.create_account("TestAccount4", email="test@test.com", password="testpassword",
+                                      typeclass=settings.BASE_ACCOUNT_TYPECLASS)
         foobar.db.FIRST_LOGIN = True
         self.msg("%s" % foobar)
         unloggedin._create_character(self, foobar, settings.BASE_CHARACTER_TYPECLASS, settings.DEFAULT_HOME,
-                                     settings.PERMISSION_PLAYER_DEFAULT)
+                                     settings.PERMISSION_ACCOUNT_DEFAULT)
 
 class OverLook(default_cmds.CmdLook):
     key = "look"

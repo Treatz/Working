@@ -35,7 +35,7 @@ class AttackTime(DefaultScript):
                self.obj.execute_cmd("skip")
                self.obj.db.start_time = time.time()
                self.stop()
-            elif(self.obj.db.target.has_player<1):
+            elif(self.obj.db.target.has_account<1):
                 self.obj.db.target.execute_cmd("skip")
                 self.obj.db.start_time = time.time()
                 self.stop()

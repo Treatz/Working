@@ -127,10 +127,10 @@ def attack_node(caller):
             init_b = init_b + roll_dice(1,10)
             if(init_a  < init_b and caller.db.conscious and caller.db.target.db.conscious):
                 caller.db.target.msg("|/|r%s is too afraid to fight" % caller.name)
-                players = [con for con in caller.location.contents if con.has_player]
-                for player in players:
-                    if not player.ndb.end_combat:
-                        player.msg("%s is too afraid to fight." % caller.name)
+                accounts = [con for con in caller.location.contents if con.has_account]
+                for account in accounts:
+                    if not account.ndb.end_combat:
+                        account.msg("%s is too afraid to fight." % caller.name)
                 text = ("|rYou are too afraid to fight")
 
                 caller.db.intimidated = 1
@@ -178,10 +178,10 @@ def attack_node(caller):
             init_b = init_b + roll_dice(1,10)
             if(init_a  < init_b and caller.db.conscious and caller.db.target.db.conscious):
                 caller.db.target.msg("|/|r%s is too afraid to fight" % caller.name)
-                players = [con for con in caller.location.contents if con.has_player]
-                for player in players:
-                    if not player.ndb.end_combat:
-                        player.msg("%s is too afraid to fight." % caller.name)
+                accounts = [con for con in caller.location.contents if con.has_account]
+                for account in accounts:
+                    if not account.ndb.end_combat:
+                        account.msg("%s is too afraid to fight." % caller.name)
                 text = ("|rYou are too afraid to fight")
 
                 caller.db.intimidated = 1
@@ -225,10 +225,10 @@ def attack_node(caller):
             init_b = init_b + roll_dice(1,10)
             if(init_a  < init_b and caller.db.conscious and caller.db.target.db.conscious):
                 caller.db.target.msg("|/|r%s is too afraid to fight" % caller.name)
-                players = [con for con in caller.location.contents if con.has_player]
-                for player in players:
-                    if not player.ndb.end_combat:
-                        player.msg("%s is too afraid to fight." % caller.name)
+                accounts = [con for con in caller.location.contents if con.has_account]
+                for account in accounts:
+                    if not account.ndb.end_combat:
+                        account.msg("%s is too afraid to fight." % caller.name)
                 text = ("|rYou are too afraid to fight")
 
                 caller.db.intimidated = 1
@@ -242,10 +242,10 @@ def select_weapon(caller, input):
     caller.db.start_time = timer()
     caller.db.selected_weapon = input
     caller.db.target.msg("|/|g%s wields his %s." % (caller.name, caller.db.selected_weapon))
-    players = [con for con in caller.location.contents if con.has_player]
-    for player in players:
-        if not player.ndb.end_combat:
-            player.msg("%s wield his %s." % (caller.name, caller.db.selected_weapon))
+    accounts = [con for con in caller.location.contents if con.has_account]
+    for account in accounts:
+        if not account.ndb.end_combat:
+            account.msg("%s wield his %s." % (caller.name, caller.db.selected_weapon))
     text = ("|/|gYou wield the %s" % input)
     EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node",auto_quit=False, cmd_on_exit=None)
 
@@ -256,10 +256,10 @@ def select_weapon(caller, input):
 def remove_weapon(caller, input):
         caller.db.start_time = timer()
         caller.db.target.msg("|/|g%s puts his %s away." % (caller.name, caller.db.selected_weapon))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s puts away his %s." % (caller.name, caller.db.selected_weapon))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s puts away his %s." % (caller.name, caller.db.selected_weapon))
         text = ("|/|gYou put your %s away" % caller.db.selected_weapon)
         caller.db.selected_weapon = "None"
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node",auto_quit=False, cmd_on_exit=None)
@@ -316,18 +316,18 @@ def punch(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou punch %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to punch you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s punches %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s punches %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s punches, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -366,18 +366,18 @@ def lethalpunch(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou execute a lethal punch on %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attacks with a lethal punch, using %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s strikes %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s strikes %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s punches, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -417,19 +417,19 @@ def claw(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou claw %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to claw you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s claws %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s claws %s." % (caller, caller.db.target))
 
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s claws, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -468,19 +468,19 @@ def bite(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou bite %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to bite you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s bites %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s bites %s." % (caller, caller.db.target))
 
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s claws, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s claws %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s claws %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -522,18 +522,18 @@ def kick(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou kick %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to kick you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s kicks %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s kicks %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s kicks, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s kicks %s." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s kicks %s." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -578,18 +578,18 @@ def axe(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou strike %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to strike you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s hits %s with his axe." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s hits %s with his axe." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s strikes, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s. with his axe" % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s. with his axe" % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -636,18 +636,18 @@ def knife(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou strike %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to strike you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s cuts %s with his knife." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s cuts %s with his knife." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s strikes, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his knife." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his knife." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -693,18 +693,18 @@ def bat(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou strike %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to strike you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s hits %s with his baseball bat." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s hits %s with his baseball bat." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s strikes, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his baseball bat." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his baseball bat." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -749,18 +749,18 @@ def staff(caller):
     if (attackpoints > 0):
         caller.msg("|/|gYou strike %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to strike you with %i succesful rolls." % (caller, attackpoints))
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s hits %s with his staff." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s hits %s with his staff." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s strikes, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his staff." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his staff." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -806,17 +806,17 @@ def katana(caller):
         caller.msg("|/|gYou strike %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to strike you with %i succesful rolls." % (caller, attackpoints))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s attacks %s with his katana." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s attacks %s with his katana." % (caller, caller.db.target))
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s strikes, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his katana." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his katana." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -862,17 +862,17 @@ def single(caller):
         caller.msg("|/|gYou shoot %s with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to shoot you with %i succesful rolls." % (caller, attackpoints))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s shoots %s with his pistol." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s shoots %s with his pistol." % (caller, caller.db.target))
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s shoots, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his pistol." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his pistol." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -918,17 +918,17 @@ def double(caller):
         caller.msg("|/|gYou shoot %s twice with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to shoot you twice with %i succesful rolls." % (caller, attackpoints))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s shoots %s twice with his pistol." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s shoots %s twice with his pistol." % (caller, caller.db.target))
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s shoots, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his pistol." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his pistol." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -974,17 +974,17 @@ def three(caller):
         caller.msg("|/|gYou shoot %s three times with %i success rolls. " % (caller.db.target, attackpoints))
         caller.db.target.msg("|/|g%s attempts to shoot you three times with %i succesful rolls." % (caller, attackpoints))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="defend_node", auto_quit=False, cmd_on_exit=None)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s shoots %s three times with his pistol." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s shoots %s three times with his pistol." % (caller, caller.db.target))
     else:
         caller.msg("|/|gYou miss %s." % caller.db.target)
         caller.db.target.msg("|/|g%s shoots, but misses you." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s misses %s with his pistol." % (caller, caller.db.target))
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s misses %s with his pistol." % (caller, caller.db.target))
         EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node", auto_quit=False, cmd_on_exit=None)
     text = ""
     options = ({"key": "skip",
@@ -1031,21 +1031,21 @@ def skip_attack(caller):
     if caller.db.intimidated:
         text = "|r You are too afraid to fight!"
         caller.db.target.msg("|/|r %s is too afraid to fight." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s cowers in fear." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s cowers in fear." % caller.name)
     if(caller.db.move_speed == "freeze"):
         caller.msg("Time is moving too slow to react") 
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s is frozen still." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s is frozen still." % caller.name)
     if(caller.db.conscious == 0 and caller.db.alive ==1):
         text = "|r You are unconscious!"
         caller.db.target.msg("|/|r %s is unconscious."% caller)
         caller.location.log_action("%s is unconscious" % caller)
-        players = [con for con in caller.location.contents if con.has_player]
+        accounts = [con for con in caller.location.contents if con.has_account]
     if(caller.db.conscious == 1 or caller.db.alive == 0):
         if(caller.db.intimidated == 0):
             text = "|r You have skipped your turn!"
@@ -1058,10 +1058,10 @@ def skip_attack(caller):
         caller.msg("|/|rYou are dead!")
         caller.db.target.msg("|/|r%s is dead!"% caller)
         caller.location.log_action("%s is dead." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s is dead!." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s is dead!." % caller.name)
                 caller.location.log_action("%s is dead." % caller.name)
         caller.ndb._menutree.close_menu()
         caller.db.target.ndb._menutree.close_menu()
@@ -1081,14 +1081,14 @@ def skip_attack(caller):
 def skip_defend(caller):
     caller.db.start_time = timer()
     caller.msg("|/|rYou have been hit by %s.|/" % caller.db.target)
-    players = [con for con in caller.location.contents if con.has_player]
-    for player in players:
-        if not player.ndb.end_combat:
-            player.msg("%s has been hit by %s." % (caller.name, caller.db.target))
+    accounts = [con for con in caller.location.contents if con.has_account]
+    for account in accounts:
+        if not account.ndb.end_combat:
+            account.msg("%s has been hit by %s." % (caller.name, caller.db.target))
     if(caller.db.conscious == 0):
         caller.db.target.msg("|/|r%s is unconscious.|/" % caller)
         caller.location.log_action("%s is unconscious" % caller)
-        players = [con for con in caller.location.contents if con.has_player]
+        accounts = [con for con in caller.location.contents if con.has_account]
     if(caller.db.conscious == 1):
         caller.db.target.msg("|/|r%s has skipped his turn.|/" % caller)
 
@@ -1343,10 +1343,10 @@ def dodge(caller):
         caller.db.target.db.conscious = 1
         caller.msg("|rYou are dead!")
         caller.location.log_action("%s is dead." % caller.name)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player == caller:
-                player.msg("|r%s is dead!" % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account == caller:
+                account.msg("|r%s is dead!" % caller.name)
         caller.locks.add("view:attr(alive, 0)")
         caller.db.target.ndb._menutree.close_menu()
         caller.ndb._menutree.close_menu()
@@ -1496,10 +1496,10 @@ def block(caller):
             caller.db.target.db.conscious = 1
             caller.msg("|rYou are dead!")
             caller.locks.add("view:attr(alive, 0)")
-            players = [con for con in caller.location.contents if con.has_player]
-            for player in players:
-                 if not player == caller:
-                    player.msg("|r%s is dead!" % caller.name)
+            accounts = [con for con in caller.location.contents if con.has_account]
+            for account in accounts:
+                 if not account == caller:
+                    account.msg("|r%s is dead!" % caller.name)
             caller.location.log_action("%s is dead." % caller.name)
             caller.db.target.ndb._menutree.close_menu()
             caller.ndb._menutree.close_menu()
@@ -1556,7 +1556,7 @@ def mercy(caller):
     if(init_a > init_b):
         caller.msg("|/|yYou beg %s for mercy!|/|/" % caller.db.target)
         caller.db.target.msg("|/|y%s cries for mercy!|/|/" % caller)
-        players = [con for con in caller.location.contents if con.has_player]
+        accounts = [con for con in caller.location.contents if con.has_account]
         caller.db.target.ndb._menutree.close_menu()
         caller.ndb._menutree.close_menu()
         caller.ndb.end_combat = 0
@@ -1587,10 +1587,10 @@ def flee_attack(caller):
     if caller.db.target.db.conscious == 0:
         caller.msg("|/|yYou leave from combat!|/|/")
         caller.db.target.msg("|/|y%s leaves from combat!|/|/" % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s leaves from combat." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s leaves from combat." % caller.name)
         caller.ndb._menutree.close_menu()
         if(caller.db.target.ndb._menutree):
             caller.db.target.ndb._menutree.close_menu()
@@ -1601,10 +1601,10 @@ def flee_attack(caller):
     elif(init_a > init_b):
         caller.msg("|/|yYou flee from combat!|/|/")
         caller.db.target.msg("|/|y%s flees from combat!|/|/" % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s flees from combat." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s flees from combat." % caller.name)
         caller.ndb._menutree.close_menu()
         if(caller.db.target.ndb._menutree):
             caller.db.target.ndb._menutree.close_menu()
@@ -1641,10 +1641,10 @@ def flee(caller):
     if(init_a > init_b or caller.db.target.db.conscious == 0 or caller.db.target.db.alive == 0):
         caller.msg("|/|yYou flee from combat!|/|/")
         caller.db.target.msg("|/|y%s flees from combat!|/|/" % caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s flees from combat." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s flees from combat." % caller.name)
         caller.db.target.ndb._menutree.close_menu()
         caller.ndb._menutree.close_menu()
         caller.ndb.end_combat = 0
@@ -1683,12 +1683,12 @@ def flee(caller):
                 caller.msg("|rYou are dead!")
                 caller.locks.add("view:attr(alive, 0)")
 
-                players = [con for con in caller.location.contents if con.has_player]
+                accounts = [con for con in caller.location.contents if con.has_account]
 
 
-                for player in players:
-                     if not player == caller:
-                        player.msg("|r%s is dead!" % caller.name)
+                for account in accounts:
+                     if not account == caller:
+                        account.msg("|r%s is dead!" % caller.name)
 
                 caller.location.log_action("%s is dead." % caller.name)
                 caller.db.target.ndb._menutree.close_menu()
@@ -1723,7 +1723,7 @@ def new_skip(caller):
         text = "|r You are unconscious."
         caller.db.target.msg("|/|r%s is unconscious. "% caller)
         caller.location.log_action("%s is unconscious." % caller)
-        players = [con for con in caller.location.contents if con.has_player]
+        accounts = [con for con in caller.location.contents if con.has_account]
     if(caller.db.conscious == 1 or caller.db.alive == 0):
         text = "|r You have skipped your turn!"
     EvMenu(caller.db.target, "typeclasses.menu", startnode="attack_node",auto_quit=False, cmd_on_exit=None)
@@ -1733,10 +1733,10 @@ def new_skip(caller):
         caller.msg("|rYou are dead!")
         caller.locks.add("view:attr(alive, 0)")
         caller.db.target.msg("|/|r%s is dead!"% caller)
-        players = [con for con in caller.location.contents if con.has_player]
-        for player in players:
-            if not player.ndb.end_combat:
-                player.msg("%s is dead!." % caller.name)
+        accounts = [con for con in caller.location.contents if con.has_account]
+        for account in accounts:
+            if not account.ndb.end_combat:
+                account.msg("%s is dead!." % caller.name)
         caller.location.log_action("%s is dead" % caller.name)
         caller.ndb._menutree.close_menu()
         caller.db.target.ndb._menutree.close_menu()

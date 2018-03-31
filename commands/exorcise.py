@@ -8,7 +8,7 @@ class CmdExorcise(MuxCommand):
     
        Usage: +exorcise target
 
-       Only used on dead players and ghosts.
+       Only used on dead accounts and ghosts.
     
     """   
 
