@@ -12,6 +12,7 @@ from typeclasses.rooms import Room
 from evennia import DefaultCharacter, TICKER_HANDLER
 from evennia.contrib.dice import roll_dice
 import random
+import evennia
 
 class Character(DefaultCharacter):
 # [...]
@@ -362,7 +363,8 @@ class Character(DefaultCharacter):
         return self.db.alive
 
     def at_post_puppet(self):
-        self.location = Room.objects.get(id=3)
+        if not self.db.npc:
+            self.location = Room.objects.get(id=3)
         super(Character, self).at_post_puppet()
         healthbar = "|/|X|[wHealth:"
         total = self.db.lethal + self.db.bashing
@@ -385,7 +387,7 @@ class Character(DefaultCharacter):
     def return_appearance(self, looker):
         looker.msg(image=[self.db.image, self.db.desc])
 
-        def at_post_unpuppet(self, account, session=None):
+    def at_post_unpuppet(self, account, session=None):
             """
             We stove away the character when the account goes ooc/logs off,
             otherwise the character object will remain in the room also
@@ -396,14 +398,14 @@ class Character(DefaultCharacter):
             session (Session): Session controlling the connection that
                 just disconnected.
             """
-            if not self.sessions.count():
+    #        if not self.sessions.count():
                # only remove this char from grid if no sessions control it anymore.
-               if self.location:
-                  self.location.for_contents(message, exclude=[self], from_obj=self)
-                  self.db.prelogout_location = self.location
-                  self.location = self.db.prelogout_location
-                  self.ndb._menutree.close_menu()
-                  self.db.target.ndb._menutree.close_menu()
+     #          if self.location:
+      #            self.location.for_contents(message, exclude=[self], from_obj=self)
+       #           self.db.prelogout_location = self.location
+        #          self.location = self.db.prelogout_location
+         #         self.ndb._menutree.close_menu()
+          #        self.db.target.ndb._menutree.close_menu()
 
 
     def at_after_move(self, source_location):

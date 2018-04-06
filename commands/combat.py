@@ -16,6 +16,12 @@ class CmdAttack(Command):
     help_category = "General"
 
     def func(self):
+        if self.caller.search(self.args).db.npc:
+           if not self.caller.search(self.args).sessions.all():
+               self.caller.msg("Please wait for a story teller...")
+               checktest = self.caller.search("Admin", global_search=True)
+               checktest.msg("%s is attacking %s." % (self.caller.name, self.caller.search(self.args).name))
+               return
         if self.caller.db.med:
             self.caller.msg("You are forced to stop your meditation.")
             self.caller.db.med = 0

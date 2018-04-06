@@ -429,6 +429,7 @@ class CmdSay(COMMAND_DEFAULT_CLASS):
 
         # Feedback for the object doing the talking.
         if(caller.db.present):
+            checktest = self.caller.search("Admin", global_search=True)
             caller.msg('You say, "%s|n"' % self.args)
             # Build the string to emit to neighbors.
             emit_string = '%s says, "%s"' % (caller.name, self.args)
@@ -437,6 +438,8 @@ class CmdSay(COMMAND_DEFAULT_CLASS):
             for item in self.caller.location.contents:
                  if (item is not self.caller):
                      item.msg(emit_string)
+                     if( item.db.npc == 1):
+                         checktest.msg('%s says to %s: %s' % (caller.name, item.name, self.args))
         else:
             caller.msg("Time has stopped.")
 
