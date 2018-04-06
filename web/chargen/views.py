@@ -48,7 +48,7 @@ def creating(request):
     if request.method == 'POST':
         myform = request.POST
         test = myform['validation']
-        if test.lower() != "august":
+        if test.lower() != "mage":
             return HttpResponseRedirect('/chargen')
         fields = myform['name']
         pwd = myform['password']

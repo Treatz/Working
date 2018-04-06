@@ -8,6 +8,7 @@ is setup to be the "default" character type created by the default
 creation commands.
 
 """
+from typeclasses.rooms import Room
 from evennia import DefaultCharacter, TICKER_HANDLER
 from evennia.contrib.dice import roll_dice
 import random
@@ -361,7 +362,7 @@ class Character(DefaultCharacter):
         return self.db.alive
 
     def at_post_puppet(self):
-
+        self.location = Room.objects.get(id=3)
         super(Character, self).at_post_puppet()
         healthbar = "|/|X|[wHealth:"
         total = self.db.lethal + self.db.bashing
