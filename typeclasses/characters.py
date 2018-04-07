@@ -388,24 +388,10 @@ class Character(DefaultCharacter):
         looker.msg(image=[self.db.image, self.db.desc])
 
     def at_post_unpuppet(self, account, session=None):
-            """
-            We stove away the character when the account goes ooc/logs off,
-            otherwise the character object will remain in the room also
-            after the account logged off ("headless", so to say).
-            Args:
-            account (Account): The account object that just disconnected
-                from this object.
-            session (Session): Session controlling the connection that
-                just disconnected.
-            """
-    #        if not self.sessions.count():
-               # only remove this char from grid if no sessions control it anymore.
-     #          if self.location:
-      #            self.location.for_contents(message, exclude=[self], from_obj=self)
-       #           self.db.prelogout_location = self.location
-        #          self.location = self.db.prelogout_location
-         #         self.ndb._menutree.close_menu()
-          #        self.db.target.ndb._menutree.close_menu()
+        if not self.sessions.count():
+           if self.location and not self.db.npc:
+              self.db.prelogout_location = self.location
+              self.location = Room.objects.get(id=3)
 
 
     def at_after_move(self, source_location):

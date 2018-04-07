@@ -70,7 +70,7 @@ class CmdLook(COMMAND_DEFAULT_CLASS):
             if not target:
                 return
         self.msg(self.caller.at_look(target))
-
+        self.msg("\n")
 
 class CmdNick(COMMAND_DEFAULT_CLASS):
     """

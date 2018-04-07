@@ -71,11 +71,10 @@ def attack_node(caller):
                       "desc": "Beg for mercy",
                       "goto": "wait",
                       "exec": "mercy_attack"},)
-        else:
-            options += ({"key": "|yflee",
-                      "desc": "Flee from combat.",
-                      "goto": "wait",
-                      "exec": "flee_attack"},)
+        options += ({"key": "|yflee",
+                  "desc": "Flee from combat.",
+                  "goto": "wait",
+                  "exec": "flee_attack"},)
 
         for each in caller.contents:
                
@@ -155,11 +154,10 @@ def attack_node(caller):
                       "desc": "Beg for mercy",
                       "goto": "wait",
                       "exec": "mercy_attack"},)
-        else:
-            options += ({"key": "|yflee",
-                      "desc": "Flee from combat.",
-                      "goto": "wait",
-                      "exec": "flee_attack"},)
+        options += ({"key": "|yflee",
+                  "desc": "Flee from combat.",
+                  "goto": "wait",
+                  "exec": "flee_attack"},)
 
 
         if(caller.db.conscious == 0 and caller.db.alive == 1):
@@ -202,11 +200,10 @@ def attack_node(caller):
                       "desc": "Beg for mercy",
                       "goto": "wait",
                       "exec": "mercy_attack"},)
-        else:
-            options += ({"key": "|yflee",
-                      "desc": "Flee from combat.",
-                      "goto": "wait",
-                      "exec": "flee_attack"},)
+        options += ({"key": "|yflee",
+                  "desc": "Flee from combat.",
+                  "goto": "wait",
+                  "exec": "flee_attack"},)
 
 
         if(caller.db.conscious == 0 and caller.db.alive == 1):
@@ -1168,11 +1165,11 @@ def defend_node(caller):
                   "desc": "Beg for mercy",
                   "goto": "wait",
                   "exec": "mercy"},)
-    else:
-        options += ({"key": "|yflee",
-                  "desc": "Run away.",
-                  "goto": "wait",
-                  "exec": "flee"},)
+    
+    options += ({"key": "|yflee",
+              "desc": "Run away.",
+              "goto": "wait",
+              "exec": "flee_attack"},)
 
 
     if(caller.db.alive == 0):
@@ -1632,9 +1629,9 @@ def flee(caller):
         caller.db.target.msg("|/|y%s doesn't want to fight." % caller)
     else:
         init_a = caller.db.dexterity + caller.db.wits + caller.db.blessed
-    init_b = caller.db.target.db.dexterity + caller.db.target.db.wits
-    init_a = init_a + roll_dice(1,10) 
-    init_b = init_b + roll_dice(1,10)
+        init_b = caller.db.target.db.dexterity + caller.db.target.db.wits
+        init_a = init_a + roll_dice(1,10) 
+        init_b = init_b + roll_dice(1,10)
     if caller.db.autopoint:
         init_a +=1
         caller.db.autopoint = 0

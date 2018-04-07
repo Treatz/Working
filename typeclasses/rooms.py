@@ -20,6 +20,7 @@ class Room(DefaultRoom):
     def return_appearance(self, looker):
         if not looker:
             return
+        looker.msg("\n")
         looker.msg(image=[self.db.image, ""])
         # get and identify all objects
       #  visible = (con for con in self.contents if con != looker and con.access(looker, "view") 
